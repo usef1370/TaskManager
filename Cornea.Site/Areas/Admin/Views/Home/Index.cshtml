@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Victory Admin</title>
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/AdminTemplate/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/AdminTemplate/images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller landing-page">
+        <div class="container-fluid top-banner">
+            <nav class="navbar navbar-expand-lg bg-transparent">
+                <div class="row flex-grow">
+                    <div class="col-md-8 d-lg-flex flex-row mx-auto">
+                        <a class="navbar-brand" href="#">
+                            <img src="~/AdminTemplate/images/logo.svg" alt="logo" />
+                        </a>
+                        <button class="navbar-toggler collapsed float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon ti ti-menu text-white"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-link" href="~/Home/Home">HOME</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-link" href="~/Authentication/Signin">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-link" href="~/Authentication/Signup">Get Started</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="row top-banner-content">
+                <div class="col-md-8 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <h1 class="mr-2 text-white">
+                                All you need for creating dashboard
+                                UI and complex web interfaces.
+                            </h1>
+                            <h3 class="font-weight-light text-white">
+                                Victory Admin Template
+                            </h3>
+                            <div class="mt-5">
+                                <button class="btn btn-success btn-lg mr-2" onclick="window.location= '@Url.Action( "Signup", "Authentication")'">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="demo-image">
+                                <img src="~/AdminTemplate/images/samples/Mac.png" alt="image" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+   
+    <!-- inject:js -->
+    <script src="~/AdminTemplate/js/off-canvas.js"></script>
+    <script src="~/AdminTemplate/js/hoverable-collapse.js"></script>
+    <script src="~/AdminTemplate/js/misc.js"></script>
+    <script src="~/AdminTemplate/js/settings.js"></script>
+    <script src="~/AdminTemplate/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
+</body>
+
+</html>
+

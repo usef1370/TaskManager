@@ -1,0 +1,52 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        window.onload = function () {
+            var clicks = 0;
+            var lastClick = [0, 0];
+
+            var canvas = document.getElementById('exemploCanvas');
+
+            canvas.addEventListener('click', draw, false);
+
+            function draw(e) {
+                ctx = this.getContext('2d');
+
+                x = getClick(e)[0]; // - this.offsetLeft;
+                y = getClick(e)[1]; // - this.offsetTop;
+
+                if (clicks != 1) {
+                    clicks++;
+                } else {
+                    ctx.beginPath();
+                    ctx.moveTo(lastClick[0], lastClick[1]);
+                    ctx.lineTo(x, y, 6);
+
+                    ctx.strokeStyle = '#000000';
+                    ctx.stroke()
+
+                    clicks = 0;
+                }
+                lastClick = [x, y];
+            }
+
+            function getClick(e) {
+                var x, y;
+
+                if (e.pageX != undefined && e.pageY != undefined) {
+                    x = e.pageX;
+                    y = e.pageY;
+                } else {
+                    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+                }
+
+                return [x, y];
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="exemploCanvas" width="800" height="600" style="background-color: #EEEEEE;"></canvas>
+</body>
+</html>

@@ -1,0 +1,200 @@
+﻿@using Cornea.Application.Services.Product.Queries.GetProduct
+@model ResultGetProductsDto;
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Products</span> - Products List</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Products</a></li>
+                    <li class="active">Products List</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+        <!-- Content area -->
+        <div class="content">
+            <!-- Media library -->
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h6 class="panel-title text-semibold">Products List</h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                            <li><a data-action="reload"></a></li>
+                            <li><a data-action="close"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <table id="ProjectTable" class="table datatable-selection-single">
+                    <thead>
+                        <tr>
+                            <th>Preview</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Number</th>
+                            <th>File info</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var data in Model.productslist)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@data.Imagedir" data-popup="lightbox">
+                                        <img src="@data.Imagedir" alt="" class="img-rounded img-preview">
+                                    </a>
+                                </td>
+                                <td>@data.Name</td>
+                                <td>@data.Price</td>
+                                <td>@data.Number</td>
+                                <td>
+                                    <a href="#">Details</a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="text-primary-600"><a href="EditProduct?searchKey=@data.Id"><i class="icon-pencil7"></i></a></li>
+                                        <li class="text-danger-600"><a data-id=@data.Id onclick="deleteProduct(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /media library -->
+
+        </div>
+        <!-- /content area -->
+
+    </div>
+<!-- /main content -->
+
+<script>
+    $("#alpaca-file-styled").alpaca({
+        "data": "",
+
+        "options": {
+            "type": "file",
+            "label": "Product Photo:",
+            "helper": "Pick your product picture.",
+            "id": "file-styled",
+            "name": "files",
+            "input": {
+                "onchange": function () {
+                    if (this.files && this.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#Preview')
+                                .attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                }
+            }
+        },
+        "schema": {
+            "type": "string",
+            "format": "uri"
+        },
+        "postRender": function (control) {
+            $("#file-styled").uniform({
+                fileButtonClass: 'action btn bg-blue'
+            });
+        }
+    });
+</script>
+<script>
+    function deleteProduct(searchKey) {
+        // Advanced initialization
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+            var postData = {
+                'searchKey': searchKey,
+            };
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                type: "POST",
+                url: "deleteProduct",
+                data: postData,
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        swal({
+                            title: "Deleted!",
+                            text: "Your imaginary file has been deleted.",
+                            type: "success"
+                        }, function () { window.location.reload(); });
+
+                    }
+                }
+            });
+
+        });
+
+    }
+</script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#Preview')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

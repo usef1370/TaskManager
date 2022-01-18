@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Products</span> - Add Product</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Products</a></li>
+                    <li class="active">Add Product</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+
+        <!-- Content area -->
+        <div class="content">
+            <!-- Daterange picker -->
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <fieldset>
+                        <legend class="text-semibold"><i class="icon-reading position-left"></i> Product details</legend>
+                        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreateProduct">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Product Name:<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" required="required" id="Name" name="Name" placeholder="Enter product name">
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label>Product Price:<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" required="required" id="Price" name="Price" placeholder="Enter price">
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label>Number:<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" required="required" id="Number" name="Number" placeholder="Enter Number">
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <img id="Preview" name="Preview" class="img-preview">
+                                </div>
+                                <div class="form-group">
+                                    <div id="alpaca-file-styled"></div>
+                                    <a href="#alpaca-file-styled-source" id="Imagedir" required="required" data-toggle="collapse"></a>
+                                </div>                                
+                            </div>    
+                            <div class="col-md-12">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary legitRipple">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- /daterange picker -->
+        </div>
+        <!-- /content area -->
+    </div>
+<!-- /main content -->
+
+<script>
+    $("#alpaca-file-styled").alpaca({
+        "data": "",
+
+        "options": {
+            "type": "file",
+            "label": "Product Photo:",
+            "helper": "Pick your product picture.",
+            "id": "file-styled",
+            "name": "files"
+        },
+        "schema": {
+            "type": "string",
+            "format": "uri"
+        },
+        "postRender": function (control) {
+            $("#file-styled").uniform({
+                fileButtonClass: 'action btn bg-blue'
+            });
+        }
+    });
+    $('#file-styled').on('change', function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#Preview')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+

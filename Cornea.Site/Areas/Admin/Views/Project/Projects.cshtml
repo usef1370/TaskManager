@@ -1,0 +1,167 @@
+﻿@using Cornea.Application.Services.Project.Queries.GetProjects
+@model ResultGetProjecsDto;
+@{
+    ViewData["Title"] = "Projects";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Projects</span> - Projects List</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Projects</a></li>
+                    <li class="active">Projects List</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+        <!-- Content area -->
+        <div class="content">
+            <!-- Single row selection -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Projects List</h5>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="reload"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <table id="ProjectTable" class="table datatable-selection-single">
+                    <thead>
+                        <tr>
+                            <th>Project name</th>
+                            <th>Start date</th>
+                            <th>Finish date</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th hidden="hidden">Id</th>
+                            <th>Timeline</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var data in Model.projectslist)
+                        {
+                            long? percent = 0;
+                            int passedTime = (DateTime.Now - data.StartTime).Days;
+                            <tr>
+                                <td>@data.ProjectName</td>
+                                <td>@data.StartTime.ToString("yyyy-MM-dd")</td>
+                                <td>@data.FinishTime.ToString("yyyy-MM-dd")</td>
+                                <td><span class="label label-danger">@data.Status</span></td>
+                                <td>@data.Priority</td>
+                                <td hidden="hidden">@data.Id</td>
+
+                                <td>
+                                    <div class="progress progress-rounded" id="h-center-basic">
+
+                                        @if (passedTime <= 0)
+                                        {
+                                            <span class="progressbar-back-text"> 0%</span>
+                                        }
+                                        else if (passedTime < data.Timeline)
+                                        {
+                                            <span class="progressbar-back-text">@((passedTime*100)/data.Timeline)%</span>
+                                            percent = (passedTime * 100) / data.Timeline;
+                                        }
+                                        else
+                                        {
+                                            <span class="progressbar-back-text">100%</span>
+                                            percent = 100;
+                                        }
+
+                                        <div class="progress-bar progress-bar-info" style="width:@percent%"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center ">
+                                    <ul class="icons-list">
+                                        <li class="text-primary-600"><a href="EditProject?searchKey=@data.Id"><i class="icon-pencil7"></i></a></li>
+                                        <li class="text-danger-600"><a onclick="deleteProject(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
+                                    </ul>     
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Single row selection -->
+        </div>
+        <!-- /content area -->
+    </div>
+<!-- /main content -->
+<script>
+    function deleteProject(searchKey) {
+        // Advanced initialization
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+            var postData = {
+                'searchKey': searchKey,
+            };
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                type: "POST",
+                url: "deleteProject",
+                data: postData,
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        swal({
+                            title: "Deleted!",
+                            text: "Your imaginary file has been deleted.",
+                            type: "success"
+                        }, function () { window.location.href("Projects"); });
+
+                    }
+                }
+            });
+
+        });
+
+    }
+</script>
+

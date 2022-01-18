@@ -1,0 +1,149 @@
+﻿@using Cornea.Application.Services.Customer.Queries.GetCustomers
+@model ResultGetCustomersDto;
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+ <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Customers</span> - Customers List</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Customers</a></li>
+                    <li class="active">Customers List</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+
+        <!-- Content area -->
+        <div class="content">
+            <!-- Single row selection -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Customers List</h5>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="reload"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <table class="table datatable-selection-single">
+                    <thead>
+                        <tr>
+                            <th>Customer name</th>
+                            <th>City</th>
+                            <th class="col-md-2">Address</th>
+                            <th>Lab name</th>
+                            <th>Phone number</th>
+                            <th>Product name</th>
+                            <th>Number</th>
+                            <th>Sale date</th>
+                            <th hidden="hidden">Id</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var data in Model.customerslist)
+                        {
+                            <tr>
+                                <td>@data.Name</td>
+                                <td>@data.City</td>
+                                <td>@data.Address</td>
+                                <td>@data.LabName</td>
+                                <td>@data.Phone</td>
+                                <td>@data.ProductName</td>
+                                <td>@data.Number</td>
+                                <td>@data.SaleDate.ToString("yyyy-MM-dd")</td>
+                                <td hidden="hidden">@data.Id</td>
+                                <td class="text-center ">                                      
+                                    <ul class="icons-list">
+                                        <li class="text-primary-600"><a href="EditCustomer?searchKey=@data.Id"><i class="icon-pencil7"></i></a></li>
+                                        <li class="text-danger-600"><a data-id=@data.Id onclick="deleteCustomer(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!-- /single row selection -->
+            </div>
+            <!-- /page container -->
+        </div>
+    </div>
+<script>
+    function deleteCustomer(searchKey) {
+        // Advanced initialization
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+            var postData = {
+                'searchKey': searchKey,
+            };
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                type: "POST",
+                url: "deleteCustomer",
+                data: postData,
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        swal({
+                            title: "Deleted!",
+                            text: "Your imaginary file has been deleted.",
+                            type: "success"
+                        }, function () { window.location.reload(); });
+
+                    }
+                }
+            });
+
+        });
+
+    }
+</script>

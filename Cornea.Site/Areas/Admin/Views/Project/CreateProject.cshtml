@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Create Projects";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Content area -->
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Projects</span> - Add Project</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Projects</a></li>
+                    <li class="active">Add Project</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+
+        <div class="content">
+            <!-- Daterange picker -->
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <fieldset>
+                        <legend class="text-semibold"><i class="icon-reading position-left"></i> Project details</legend>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Project Name:<span class="text-danger">*</span></label>
+                                <input type="text" required="required" class="form-control" id="ProjectName" placeholder="Enter project name">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="display-block">Status:<span class="text-danger">*</span></label>
+                                <select class="select" id="Status" required="required">
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="Is Working">Is Working</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="display-block">Priority:<span class="text-danger">*</span></label>
+                                <select class="select" id="Priority" required="required">
+                                    <option style="background-color: blue!important" value="Low">Low</option>
+                                    <option style="background-color: green!important" value="Medium">Medium</option>
+                                    <option style="background-color: red!important" value="High">High</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Your Description:</label>
+                                <textarea rows="4" class="form-control" id="Message" placeholder="Enter your description here"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Deadline: <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input id="DateRange" required="required" type="text" class="form-control daterange-datemenu" value="03/18/2021 - 03/23/2021">
+                                    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="text-right">
+                        <button type="submit" onclick="AddProject()" class="btn btn-primary legitRipple">Save<i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!-- /daterange picker -->
+        </div>
+        <!-- /content area -->
+    </div>
+<!-- /main content -->
+
+<link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/Sweetalert2/sweetalert2.min.js"></script>
+
+<script>
+    function AddProject() {
+
+        var ProjectName = $("#ProjectName").val();
+        var Status = document.getElementById("Status").value;
+        var Priority = document.getElementById("Priority").value;
+        var DateRange = $("#DateRange").val();
+        var Message = $("#Message").val();
+
+        var postData = {
+            'ProjectName': ProjectName,
+            'Status': Status,
+            'Priority': Priority,
+            'DateRange': DateRange,
+            'Message': Message
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "CreateProject",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        window.location.reload();
+                    });
+                }
+                else {
+
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+            },
+            error: function (request, status, error) {
+                swal.fire(
+                    'هشدار!',
+                    request.responseText,
+                    'warning'
+                );
+            }
+        });
+    }
+</script>
+
+

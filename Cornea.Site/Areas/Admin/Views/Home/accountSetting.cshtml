@@ -1,0 +1,415 @@
+﻿@using Cornea.Application.Services.Users.Queries.FindUsers
+@using Cornea.Common.Dto
+@model ResultDto<ResultFindUsersService>;
+@{
+    ViewData["Title"] = "AccountSetting";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="panel-heading">
+            <h5 class="panel-title">Editable inputs</h5>
+            <div class="heading-elements">
+                <form class="heading-form" action="#">
+                    <div class="form-group">
+                        <label class="checkbox-inline checkbox-switchery checkbox-right switchery-xs">
+                            <input type="checkbox" class="switchery" checked="checked">
+                            Enable editable:
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Datatables</span> - Select</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Datatables</a></li>
+                <li class="active">Select</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Basic setup -->
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h6 class="panel-title">Profile Information </h6>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <form class="form-basic" method="post" enctype="multipart/form-data" asp-action="AccountSetting">
+                <fieldset class="step" id="step1">
+                    <h6 class="form-wizard-title text-semibold alpha-blue text-center">
+                        <br />
+                        Personal info
+                        <small class="display-block">Tell us a bit about yourself</small>
+                    </h6>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Full name:</label>
+                                <input type="text" class="form-control" placeholder="John" id="Fullname" name="Fullname" value="@Model.Data.Fullname">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Select position:</label>
+                                <select name="Position" id="Position" data-placeholder="Select position" class="select">
+                                    <option selected="selected">@Model.Data.Position</option>
+                                    <optgroup label="Developer Relations">
+                                        <option value="Sales Engineer">Sales Engineer</option>
+                                        <option value="Ads Solutions Consultant">Ads Solutions Consultant</option>
+                                        <option value="Technical Solutions Consultant">Technical Solutions Consultant</option>
+                                        <option value="Business Intern">Business Intern</option>
+                                    </optgroup>
+
+                                    <optgroup label="Engineering &amp; Design">
+                                        <option value="Interaction Designer">Interaction Designer</option>
+                                        <option value="Technical Program Manager">Technical Program Manager</option>
+                                        <option value="Software Engineer">Software Engineer</option>
+                                        <option value="Information Security Engineer">Information Security Engineer</option>
+                                        <option value="Security Engineer">Security Engineer</option>
+                                        <option value="Usability Expert">Usability Expert</option>
+                                        <option value="UI Designer">UI Designer</option>
+                                        <option value="Illustrator">Illustrator</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="text" class="form-control" placeholder="+99-99-9999-9999" id="Phone" name="Phone" value="@Model.Data.Phone">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email address:</label>
+                                <input type="email" class="form-control" placeholder="your@email.com" id="Email" name="Email" value="@Model.Data.Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <img src="@Model.Data.Imagedir" id="Preview" name="Preview" class="img-preview">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <div id="alpaca-file-styled"></div>
+                                    <a href="#alpaca-file-styled-source" id="Imagedir" required="required" data-toggle="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Date of birth:</label>
+                                <div class="input-group">
+                                    <input type="text" name="Birthday" id="Birthday" value="@Model.Data.Birthday" class="form-control daterange-single">
+                                    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <h6 class="form-wizard-title text-semibold alpha-blue text-center">
+                        <br />
+                        Your education
+                        <small class="display-block">Let us know about your degree</small>
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>University:</label>
+                                <input type="text" placeholder="University name" class="form-control" id="University" name="University" value="@Model.Data.University">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>From:</label>
+                                    <div class="form-group">
+                                        <input type="text" name="StartEducationTime" placeholder="October, 2020." class="form-control" value="@Model.Data.StartEducationTime">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>To:</label>
+                                    <div class="form-group">
+                                        <input type="text" name="FinishEducationTime" placeholder="October, 2020." class="form-control" value="@Model.Data.FinishEducationTime">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Degree level:</label>
+                                <input type="text" placeholder="Bachelor, Master etc." class="form-control" id="DegreeLevel" name="DegreeLevel" value="@Model.Data.DegreeLevel">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Specialization:</label>
+                                <input type="text" placeholder="Design, Development etc." class="form-control" id="Specialization" name="Specialization" value="@Model.Data.Specialization">
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <br />
+                    <h6 class="form-wizard-title text-semibold alpha-blue text-center">
+                        <br />
+                        Work experience
+                        <small class="display-block">Previous work places</small>
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Company:</label>
+                                <input type="text" placeholder="Company name" class="form-control" id="Company" name="Company" value="@Model.Data.Company">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Position:</label>
+                                <input type="text" placeholder="Company name" class="form-control" id="Position" name="Position" value="@Model.Data.Position">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>From:</label>
+                                    <div class="form-group">
+                                        <input type="text" name="StartLastjobTime" placeholder="October, 2020." class="form-control" value="@Model.Data.StartLastjobTime">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>To:</label>
+                                    <div class="form-group">
+                                        <input type="text" name="FinishLastjobTime" placeholder="October, 2020." class="form-control" value="@Model.Data.FinishLastjobTime">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Brief description:</label>
+                                <textarea name="experience-description" rows="1" cols="4" placeholder="Tasks and responsibilities" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <h6 class="form-wizard-title text-semibold alpha-blue text-center">
+                        <br />
+                        Additional info
+                        <small class="display-block">We are almost done now</small>
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="display-block">Applicant resume:</label>
+                                <input type="file" name="resume" class="file-styled">
+                                <span class="help-block">Accepted formats: pdf, doc. Max file size 2Mb</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Additional information:</label>
+                                <textarea name="additional-info" rows="5" cols="5" placeholder="If you want to add any info, do it here." class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-wizard-actions">
+                        <button class="btn bg-blue" id="cancel-next" type="submit">Update</button>
+                    </div>
+                </fieldset>
+            </form>
+         
+        </div>
+        <!-- /basic setup -->
+        <!-- Account settings -->
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">Account settings</h6>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="reload"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Username</label>
+                            <input type="text" readonly="readonly" class="form-control" id="UserName" name="UserName" value="@Model.Data.UserName">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Current password</label>
+                            <input type="password" readonly="readonly" class="form-control" id="Password" name="Password" value="@Model.Data.Password">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>New password</label>
+                            <input type="password" placeholder="Enter new password" class="form-control" id="NewPassword">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Repeat password</label>
+                            <input type="password" placeholder="Repeat new password" class="form-control" id="ConfirmPassword">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button onclick="Save()" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- /account settings -->
+    </div>
+    <!-- /content area -->
+
+</div>
+<!-- /main content -->
+<script>
+    function Save() {
+        var NewPassword = $("#NewPassword").val();
+        var ConfirmPassword = $("#ConfirmPassword").val();
+        if (NewPassword != ConfirmPassword)
+        {
+            swal(
+                "Warning!",
+                "New password and confirm password must be same.",
+                "warning"
+            );
+        }
+        var postData = {
+            'NewPassword': NewPassword,
+            'ConfirmPassword': ConfirmPassword,
+
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "ChangePassword",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal({
+                        title: "Updated!",
+                        text: data.message,
+                        type: "success"
+                    }, function () {
+                            location.reload(true);
+                            document.getElementById("Password").value = data.data.NewPassword;
+                    });
+                }
+                else {
+                    swal({
+                        title: "Warning!",
+                        text: data.message,
+                        type: "warning"
+                    }, function () { location.reload(true); });
+                }
+            },
+            error: function (request, status, error) {
+                swal({
+                    title: "Warning!",
+                    text: request.responseText,
+                    type: "warning"
+                }, function () { location.reload(true); });
+            }
+        });
+    }
+</script>
+<script>
+    $("#alpaca-file-styled").alpaca({
+        "data": "",
+
+        "options": {
+            "type": "file",
+            "label": "Profile Photo:",
+            "helper": "Select your profile picture.",
+            "id": "file-styled",
+            "name": "files"
+        },
+        "schema": {
+            "type": "string",
+            "format": "uri"
+        },
+        "postRender": function (control) {
+            $("#file-styled").uniform({
+                fileButtonClass: 'action btn bg-blue'
+            });
+        }
+    });
+    $('#file-styled').on('change', function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#Preview')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>

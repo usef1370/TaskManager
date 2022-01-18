@@ -1,0 +1,100 @@
+﻿@using Cornea.Application.Services.Users.Queries.GetUsers
+@model ResultGetUsersDto;
+@{
+    ViewData["Title"] = "Source";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Main content -->
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Source</span> - Source</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Source</a></li>
+                <li class="active">Source</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+        <!-- Rounded thumbs -->
+        <h6 class="content-group text-semibold">
+            Rounded thumbs
+            <small class="display-block">Responsive rounded thumbs</small>
+        </h6>
+
+        <div class="row">
+            @foreach (var data in Model.Users)
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="thumbnail">
+                        <div class="thumb thumb-rounded">
+                            @if (@data.Imagedir == null)
+                            {
+                                <img src="~/AdminTemplate/assets/images/placeholder.jpg" alt="">
+                                <div class="caption-overflow">
+                                    <span>
+                                        <a href="~/AdminTemplate/assets/images/placeholder.jpg" class="btn bg-success-400 btn-icon btn-xs" data-popup="lightbox"><i class="icon-plus2"></i></a>
+                                    </span>
+                                </div>
+                            }
+                            else
+                            {
+                                <img class="img-circle img-responsive" src="@data.Imagedir" alt="">
+                                <div class="caption-overflow">
+                                    <span>
+                                        <a href="@data.Imagedir" class="btn bg-success-400 btn-icon btn-xs" data-popup="lightbox"><i class="icon-plus2"></i></a>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="caption text-center">
+                            <h6 class="text-semibold no-margin">@data.Fullname <small class="display-block">@data.Position</small></h6>
+                            <a href="/Admin/Home/Profile?searchKey=@data.UserId">more information</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- /rounded thumbs-->
+    </div>
+    <!-- /content area -->
+
+</div>
+<!-- /main content -->
+

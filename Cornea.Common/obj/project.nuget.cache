@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Q4vOPCJ5JBFnZ2+nk5JNHwEIR36AsJ+16vs59GngRXIosKGabvskYQtEQZ9XGg+ISB5N+ye/GSyVjSlHFaajuA==",
+  "success": true,
+  "projectFilePath": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yousef\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Yousef\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

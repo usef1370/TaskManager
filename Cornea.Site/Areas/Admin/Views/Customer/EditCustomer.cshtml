@@ -1,0 +1,185 @@
+﻿@using Cornea.Application.Services.Customer.Queries.FindCustomers
+@using Cornea.Application.Services.Product.Queries.GetProduct
+@using Cornea.Common.Dto
+@model Tuple<ResultDto<ResultFindCustomersService>, ResultGetProductsDto>;
+@{
+    ViewData["Title"] = "EditCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Main content -->
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Customers</span> - Edit Customer</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Customers</a></li>
+                <li class="active">Edit Customers</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Daterange picker -->
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <fieldset>
+                        <legend class="text-semibold"><i class="icon-reading position-left"></i> Customer details</legend>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Customer Name:</label>
+                                <input type="text" class="form-control" id="Name" value="@Model.Item1.Data.Name" placeholder="Enter customer name">
+                            </div>
+                            <br />
+                            <div class="form-group" hidden="hidden">
+                                <input type="text" class="form-control" id="_id" name="_id" value="@Model.Item1.Data.Id">
+                            </div>
+                            <div class="form-group">
+                                <label>Lab Name:</label>
+                                <input type="text" class="form-control" id="LabName" value="@Model.Item1.Data.LabName" placeholder="Enter lab name">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Customer Phone:</label>
+                                <input type="text" class="form-control" id="Phone" value="@Model.Item1.Data.Phone" placeholder="Enter customer phone">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Number:</label>
+                                <input type="text" class="form-control" id="Number" value="@Model.Item1.Data.Number" placeholder="Enter number">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Product name:</label>
+                                @*<input type="text" class="form-control" id="ProductName" value="@Model.Item2.Data.ProductName" placeholder="Enter number">*@
+                            <select class="select" id="ProductName">
+                                <option>@Model.Item1.Data.ProductName</option>
+                                @foreach (var data in Model.Item2.productslist)
+                                {
+                                    <option>@data.Name</option>
+                                }
+                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>City:</label>
+                                <input type="text" class="form-control" id="City" value="@Model.Item1.Data.City" placeholder="Enter customer city">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <input rows="2" class="form-control" id="Address" value="@Model.Item1.Data.Address" placeholder="Enter address" />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Sale Date: </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                    <input type="text" id="SaleDate" value="@Model.Item1.Data.SaleDate" class="form-control daterange-single">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="text-right">
+                    <button type="submit" onclick="Save()" class="btn btn-primary legitRipple">Update</button>
+                </div>
+            </div>
+        </div>
+        <!-- /daterange picker -->
+    </div>
+    <!-- /content area -->
+</div>
+<!-- /main content -->
+
+<script>
+    function Save() {
+
+        var Name = $("#Name").val();
+        var _id = $("#_id").val();
+        var LabName = $("#LabName").val();
+        var Phone = $("#Phone").val();
+        var Number = $("#Number").val();
+        var ProductName = $("#ProductName").val();
+        var City = $("#City").val();
+        var Address = $("#Address").val();
+        var SaleDate = $("#SaleDate").val();
+
+        var postData = {
+            'Name': Name,
+            '_id': _id,
+            'LabName': LabName,
+            'Number': Number,
+            'ProductName': ProductName,
+            'Phone': Phone,
+            'City': City,
+            'Address': Address,
+            'SaleDate': SaleDate
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "EditCustomer",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal({
+                        title: "Updated!",
+                        text: data.message,
+                        type: "success"
+                    }, function () { window.location.href = "Customers"; });
+                }
+                else {
+                    swal({
+                        title: "Warning!",
+                        text: data.message,
+                        type: "warning"
+                    }, function () { location.reload(true); });
+                }
+            },
+            error: function (request, status, error) {
+                swal({
+                    title: "Warning!",
+                    text: data.message,
+                    type: "warning"
+                }, function () { location.reload(true); });
+            }
+        });
+    }
+</script>

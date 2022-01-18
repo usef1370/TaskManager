@@ -1,0 +1,184 @@
+﻿
+@using Cornea.Application.Services.Task.Queries.FindTasks
+@using Cornea.Common.Dto
+@model ResultDto<ResultFindTasksService>
+@{
+    ViewData["Title"] = "DetailTask";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Datatables</span> - Select</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Datatables</a></li>
+                <li class="active">Select</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Daterange picker -->
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <fieldset>
+                        <legend class="text-semibold"><i class="icon-reading position-left"></i> Task Details</legend>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="display-block border-blue">Project:</label>
+                                <input type="text" readonly="readonly" class="form-control" id="ProjectName" value="@Model.Data.ProjectName">
+                            </div>
+                            <div class="form-group">
+                                <label>Task Name:</label>
+                                <input type="text" readonly="readonly" class="form-control" id="Owner" value="@Model.Data.TaskName">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Owner Name:</label>
+                                <input type="text" readonly="readonly" class="form-control" id="Owner" value="@Model.Data.Owner">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Status:</label>
+                                <input type="text" readonly="readonly" class="form-control" id="Owner" value="@Model.Data.Status">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Priority:</label>
+                                <input type="text" readonly="readonly" class="form-control" id="Owner" value="@Model.Data.Priority">
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Your Description:</label>
+                                <textarea rows="4" readonly="readonly" class="form-control" id="Message" value="@Model.Data.Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Deadline: </label>
+                                    <br />
+                                    <br />
+                                    @if (Model.Data.Filedir != null)
+                                    {
+                                        <label> Uploaded files: </label>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="progress progress-rounded" id="h-center-basic">
+                                        @{long? percent = 0;
+                                            int passedTime = (DateTime.Now - Model.Data.StartTime).Days;}
+                                        @if (passedTime <= 0)
+                                        {
+                                            <span class="progressbar-back-text"> 0%</span>
+                                        }
+                                        else if (passedTime < Model.Data.Timeline)
+                                        {
+                                            <span class="progressbar-back-text">@((passedTime*100)/ Model.Data.Timeline)%</span>
+                                            percent = (passedTime * 100) / Model.Data.Timeline;
+                                        }
+                                        else
+                                        {
+                                            <span class="progressbar-back-text">100%</span>
+                                            percent = 100;
+                                        }
+                                        <div class="progress-bar progress-bar-info" style="width:@percent%"></div>
+                                    </div>
+                                    <br />
+                                    @if(Model.Data.Filedir != null)
+                                    {
+                                        @foreach (string file in Model.Data.Filedir.Split("$"))
+                                        {
+                                            var filename = file.Split("/")[2];
+                                            <a href="~/Admin/Task/DownloadFile?fileName=@file"><i class="icon-download position-left"></i>@filename</a>
+                                            <br />
+                                        }
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <!-- /daterange picker -->
+    </div>
+    <!-- /content area -->
+</div>
+<script>
+    function download() {
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "DetailTask",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal({
+                        title: "Updated!",
+                        text: data.message,
+                        type: "success"
+                    }, function () { window.location.href = "Tasks"; });
+                }
+                else {
+                    swal({
+                        title: "Warning!",
+                        text: data.message,
+                        type: "warning"
+                    }, function () { location.reload(true); });
+                }
+            },
+            error: function (request, status, error) {
+                swal({
+                    title: "Warning!",
+                    text: request.responseText,
+                    type: "warning"
+                }, function () { location.reload(true); });
+            }
+        });
+    }
+</script>
+
+

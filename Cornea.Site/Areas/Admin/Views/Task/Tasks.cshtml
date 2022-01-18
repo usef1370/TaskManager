@@ -1,0 +1,231 @@
+﻿@using Cornea.Application.Services.Task.Queries.GetTasks
+@using Cornea.Application.Services.Project.Queries.GetProjects
+@using Cornea.Application.Services.Users.Queries.GetUsers
+@model Tuple<ResultGetTasksDto, ResultGetProjecsDto, ResultGetUsersDto>
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Tasks</span> - Tasks List</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Tasks</a></li>
+                <li class="active">Tasks List</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Task manager table -->
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h6 class="panel-title">Task manager</h6>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="reload"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <table class="table tasks-list table-lg">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ProjectName</th>
+                        <th>Task Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Timeline</th>
+                        <th>Assigned To</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int counter = 1;
+                        foreach (var data in Model.Item1.taskslist)
+                        {
+                            long? percent = 0;
+                            int passedTime = (DateTime.Now - data.StartTime).Days;
+                                        <tr>
+                                            <td>#@counter</td>
+                                            <td>@data.ProjectName</td>
+                                            <td>
+                                                <div class="text-semibold"><a data-id=@data.Id href="DetailTask?searchKey=@data.Id">@data.TaskName</a></div>
+                                                <div class="text-muted">Grumbled ripely eternal sniffed the when hello less much..</div>
+                                            </td>
+                                            <td>@data.Priority</td>
+                                            <td>@data.Status</td>
+                                            <td>
+                                                <div class="progress progress-rounded" id="h-center-basic">
+                                                    @if (passedTime <= 0)
+                                                    {
+                                                        <span class="progressbar-back-text"> 0%</span>
+                                                    }
+                                                    else if (passedTime < data.Timeline)
+                                                    {
+                                                        <span class="progressbar-back-text">@((passedTime*100)/data.Timeline)%</span>
+                                                        percent = (passedTime * 100) / data.Timeline;
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="progressbar-back-text">100%</span>
+                                                        percent = 100;
+                                                    }
+                                                    <div class="progress-bar progress-bar-info" style="width:@percent%"></div>
+                                                </div>
+                                            </td>
+                                            <td>@data.Owner</td>
+                                            @*<td>
+                                                <a href="#"><img src="/Images/4d1745b8-3cf4-438a-ba81-aeaa98ea6a43.jpg" class="img-circle img-xs" alt=""></a>
+                                            </td>*@
+                                            <td class="text-center">
+                                                <ul class="icons-list">
+                                                    <li class="text-primary-600"><a href="EditTask?searchKey=@data.Id"><i class="icon-pencil7"></i></a></li>
+                                                    <li class="text-danger-600"><a data-id=@data.Id onclick="deleteTask(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                            counter++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /Task manager table -->
+
+    </div>
+    <!-- /content area -->
+</div>
+<!-- /main content -->
+
+
+<link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/Sweetalert2/sweetalert2.min.js"></script>
+<script>
+    function deleteTask(searchKey) {
+        // Advanced initialization
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false,
+            html: false
+        }, function () {
+            var postData = {
+                'searchKey': searchKey,
+            };
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                type: "POST",
+                url: "deleteTask",
+                data: postData,
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        swal({
+                            title: "Deleted!",
+                            text: "Your imaginary file has been deleted.",
+                            type: "success"
+                        }, function () { window.location.reload(); });
+
+                    }
+                }
+            });
+
+        });
+
+    }
+</script>
+<script>
+    function findTask(searchKey) {
+        var postData = {
+            'searchKey': searchKey,
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "findTask",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    document.getElementById("ProjectName").value = data.data.projectName;
+                    document.getElementById("Owner").value = data.data.projectName;
+                    $("#TaskName").text(data.data.taskName);
+                    document.getElementById("Status").value = data.data.taskName;
+                    document.getElementById("Priority").value = data.data.taskName;
+                    //document.getElementById("Filedir").value = data.data.filedir;
+
+                    $("#modal_form_horizontal").modal('show');
+                }
+                else {
+
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+            },
+
+            error: function (request, status, error) {
+                swal.fire(
+                    'هشدار!',
+                    request.responseText,
+                    'warning'
+                );
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function performClick(elemId) {
+        var elem = document.getElementById(elemId);
+        if (elem && document.createEvent) {
+            var evt = document.createEvent("MouseEvents");
+            evt.initEvent("click", true, false);
+            elem.dispatchEvent(evt);
+        }
+    }
+</script>

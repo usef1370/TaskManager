@@ -1,0 +1,181 @@
+﻿@using Cornea.Application.Services.Task.Queries.FindTasks
+@using Cornea.Common.Dto
+@using Cornea.Application.Services.Project.Queries.GetProjects
+@using Cornea.Application.Services.Users.Queries.GetUsers
+@model Tuple<ResultDto<ResultFindTasksService>, ResultGetProjecsDto, ResultGetUsersDto>
+@{
+    ViewData["Title"] = "EditTask";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Datatables</span> - Select</h4>
+                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+            </div>
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-component">
+            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            <ul class="breadcrumb">
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a href="datatable_extension_select.html">Datatables</a></li>
+                <li class="active">Select</li>
+            </ul>
+            <ul class="breadcrumb-elements">
+                <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                        <i class="icon-gear position-left"></i>
+                        Settings
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                        <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                        <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Content area -->
+    <div class="content">
+        <!-- Daterange picker -->
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <fieldset>
+                        <legend class="text-semibold"><i class="icon-reading position-left"></i> Task details</legend>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="display-block">Project:</label>
+                                <select class="select" id="ProjectName">
+                                    @foreach (var data in Model.Item2.projectslist)
+                                    {                                      
+                                        <option  @if (Model.Item1.Data.ProjectName == data.ProjectName) { <text> selected="selected" </text> }>@data.ProjectName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Task Name:</label>
+                                <input type="text" class="form-control" id="TaskName" value="@Model.Item1.Data.TaskName" placeholder="Enter project name">
+                            </div>
+                            <br />
+                            <div class="form-group" hidden="hidden">
+                                <input type="text" class="form-control" id="TaskId" value="@Model.Item1.Data.Id" placeholder="Enter project name">
+                            </div>
+                            @*<div class="form-group">
+                                <label>Owner Name:</label>
+                                <br />
+                                <label id="Owner">@Model.Item1.Data.Owner</label>
+                            </div>*@
+                            <br />
+                            <div class="form-group">
+                                <label class="display-block">Status:</label>
+                                <select class="select" id="Status">
+                                    <option value="Not Started" @if (Model.Item1.Data.Status == "Not Started") { <text> selected="selected" </text> }>Not Started</option>
+                                    <option value="Is Working" @if (Model.Item1.Data.Status == "Is Working") { <text> selected="selected" </text> }>Is Working</option>
+                                    <option value="Completed" @if (Model.Item1.Data.Status == "Completed") { <text> selected="selected" </text> }>Completed</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="display-block">Priority:</label>
+                                <select class="select" id="Priority">
+                                    <option style="background-color: blue!important" value="Low" @if (Model.Item1.Data.Priority == "Low") { <text> selected="selected" </text> }>Low</option>
+                                    <option style="background-color: green!important" value="Medium" @if (Model.Item1.Data.Priority == "Medium") { <text> selected="selected" </text> }>Medium</option>
+                                    <option style="background-color: red!important" value="High" @if (Model.Item1.Data.Priority == "High") { <text> selected="selected" </text> }>High</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label>Your Description:</label>
+                                <input rows="4" class="form-control" id="Message" value="@Model.Item1.Data.Message" placeholder="Enter your description here" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Deadline: </label>
+                                <div class="input-group">
+                                    <input id="DateRange" type="text" class="form-control daterange-datemenu" value="@Model.Item1.Data.StartTime - @Model.Item1.Data.FinishTime">
+                                    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="text-right">
+                    <button type="submit" onclick="Save()" class="btn btn-primary legitRipple">Update<i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- /daterange picker -->
+    </div>
+    <!-- /content area -->
+</div>
+<!-- /main content -->
+<script>
+    function Save() {
+
+        var TaskId = $("#TaskId").val();
+        var ProjectName = document.getElementById("ProjectName").value;
+        var TaskName = $("#TaskName").val();
+        var Status = document.getElementById("Status").value;
+        var Priority = document.getElementById("Priority").value;
+        var DateRange = $("#DateRange").val();
+        var Message = $("#Message").val();
+
+        var postData = {
+            'TaskId': TaskId,
+            'ProjectName': ProjectName,
+            'TaskName': TaskName,
+            'Status': Status,
+            'Priority': Priority,
+            'DateRange': DateRange,
+            'Message': Message
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "EditTask",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal({
+                        title: "Updated!",
+                        text: data.message,
+                        type: "success"
+                    }, function () { window.location.href = "Tasks"; });
+                }
+                else {
+                    swal({
+                        title: "Warning!",
+                        text: data.message,
+                        type: "warning"
+                    }, function () { location.reload(true); });
+                }
+            },
+            error: function (request, status, error) {
+                swal({
+                    title: "Warning!",
+                    text: request.responseText,
+                    type: "warning"
+                }, function () { location.reload(true); });
+            }
+        });
+    }
+</script>

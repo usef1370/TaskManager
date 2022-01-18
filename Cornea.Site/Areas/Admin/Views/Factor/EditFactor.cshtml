@@ -1,0 +1,156 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@using Cornea.Site.Areas.Admin.Models
+@model ProductViewModel
+@{
+    ViewData["Title"] = "EditFactor";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Factors</span> - Edit Factor</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Factors</a></li>
+                    <li class="active">Edit Factor</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+
+        <!-- Content area -->
+        <div class="content">
+            <!-- Daterange picker -->
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="row">
+                        <fieldset>
+                            <legend class="text-semibold"><i class="icon-reading position-left"></i> Factor details</legend>
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="display-block">Product:</label>
+                                        <select class="select" asp-for="ProductName" asp-items="@Model.ProductList">
+                                            <option value="@ViewBag.ProuductName">@ViewBag.ProuductName</option>
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label>Factor Number:</label>
+                                        <input type="text" class="form-control" asp-for="FactorNumber" value="@ViewBag.FactorNumber">
+                                    </div>
+                                    <div class="form-group" hidden="hidden">
+                                        <input type="text" class="form-control" asp-for="FactorId" value="@ViewBag.Id">
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label>Factor Price:</label>
+                                        <input type="text" class="form-control" asp-for="Price" value="@ViewBag.Price">
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label>Number:</label>
+                                        <input type="text" class="form-control" asp-for="Number" value="@ViewBag.Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Issuance Date: </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                            <input type="text" asp-for="Issuancedate" class="form-control daterange-single" value="@ViewBag.Issuancedate">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <div id="alpaca-file-styled"></div>
+                                        <a href="#alpaca-file-styled-source" asp-for="files" data-toggle="collapse"></a>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <button type="submit" href='@Url.Action("EditFactor", "Home", new { area = "Admin" })' class="btn btn-primary legitRipple">Save</button>
+                                    </div>
+                                </div>                               
+                            </form>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /daterange picker -->
+        </div>
+        <!-- /content area -->
+    </div>
+<!-- /main content -->
+
+<script>
+    $("#alpaca-file-styled").alpaca({
+        "data": "",
+
+        "options": {
+            "type": "file",
+            "label": "Product Photo:",
+            "helper": "Pick your product picture.",
+            "id": "file-styled",
+            "name": "files"
+        },
+        "schema": {
+            "type": "string",
+            "format": "uri"
+        },
+        "postRender": function (control) {
+            $("#file-styled").uniform({
+                fileButtonClass: 'action btn bg-blue'
+            });
+        }
+    });
+    $('#file-styled').on('change', function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#Preview')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>

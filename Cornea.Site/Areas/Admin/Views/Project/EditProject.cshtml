@@ -1,0 +1,164 @@
+﻿@using Cornea.Application.Services.Project.Queries.FindProjects
+@using Cornea.Common.Dto
+@model ResultDto<ResultFindProjectsService>;
+@{
+    ViewData["Title"] = "EditProject";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-header-content">
+                <div class="page-title">
+                    <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Projects</span> - Edit Project</h4>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>
+                <div class="heading-elements">
+                    <div class="heading-btn-group">
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                        <a href="#" class="btn btn-link btn-float text-size-small has-text legitRipple"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-line breadcrumb-line-component">
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
+                    <li><a href="datatable_extension_select.html">Projects</a></li>
+                    <li class="active">Edit Project</li>
+                </ul>
+                <ul class="breadcrumb-elements">
+                    <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+                            <i class="icon-gear position-left"></i>
+                            Settings
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                            <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                            <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /page header -->
+
+        <!-- Content area -->
+        <div class="content">
+            <!-- Daterange picker -->
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="row">
+                        <fieldset>
+                            <legend class="text-semibold"><i class="icon-reading position-left"></i> Edit Project</legend>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Name:<span class="text-danger">*</span></label>
+                                    <input type="text" required="required" class="form-control" id="ProjectName" value="@Model.Data.ProjectName" placeholder="Enter project name">
+                                </div>
+                                <br />
+                                <div class="form-group" hidden="hidden">
+                                    <input class="form-control" id="ProjectId" value="@Model.Data.Id" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="display-block">Status:<span class="text-danger">*</span></label>
+                                    <select class="select" id="Status" required="required">
+                                        <option value="Not Started" @if (Model.Data.Status == "Not Started") { <text> selected="selected" </text> }>Not Started</option>
+                                        <option value="Is Working" @if (Model.Data.Status == "Is Working") { <text> selected="selected" </text> }>Is Working</option>
+                                        <option value="Completed" @if (Model.Data.Status == "Completed") { <text> selected="selected" </text> }>Completed</option>
+                                    </select>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label class="display-block">Priority:<span class="text-danger">*</span></label>
+                                    <select class="select" id="Priority" required="required">
+                                        <option style="background-color: blue!important" value="Low" @if (Model.Data.Priority == "Low") { <text> selected="selected" </text> }>Low</option>
+                                        <option style="background-color: green!important" value="Medium" @if (Model.Data.Priority == "Medium") { <text> selected="selected" </text> }>Medium</option>
+                                        <option style="background-color: red!important" value="High" @if (Model.Data.Priority == "High") { <text> selected="selected" </text> }>High</option>
+                                    </select>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label>Your Description:</label>
+                                    <input rows="4" class="form-control" id="Message" value="@Model.Data.Message" placeholder="Enter your description here" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Deadline: <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input id="DateRange" required="required" type="text" class="form-control daterange-datemenu" value="value=@Model.Data.StartTime - @Model.Data.FinishTime">
+                                        <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" onclick="Save()" class="btn btn-primary legitRipple">Update<i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!-- /daterange picker -->
+        </div>
+        <!-- /content area -->
+    </div>
+<!-- /main content -->
+
+<script>
+    function Save() {
+        var ProjectId = $("#ProjectId").val();
+        var ProjectName = $("#ProjectName").val();
+        var Status = document.getElementById("Status").value;
+        var Priority = document.getElementById("Priority").value;
+        var DateRange = $("#DateRange").val();
+        var Message = $("#Message").val();
+
+        var postData = {
+            'ProjectId': ProjectId,
+            'ProjectName': ProjectName,
+            'Status': Status,
+            'Priority': Priority,
+            'DateRange': DateRange,
+            'Message': Message
+        };
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "EditProject",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal({
+                        title: "Updated!",
+                        text: data.message,
+                        type: "success"
+                    }, function () { window.location.href = "Projects"; });
+                }
+                else {
+                    swal({
+                        title: "Warning!",
+                        text: data.message,
+                        type: "warning"
+                    }, function () { location.reload(true); });
+                }
+            },
+            error: function (request, status, error) {
+                swal({
+                    title: "Warning!",
+                    text: request.responseText,
+                    type: "warning"
+                }, function () { location.reload(true); });
+            }
+        });
+    }
+</script>
