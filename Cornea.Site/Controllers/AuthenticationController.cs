@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Cornea.Application.Services.Users.Commands.LoginUser;
 using Cornea.Application.Services.Users.Commands.RegisterUsers;
 using Cornea.Common.Dto;
+using Cornea.Site.Models;
 using EndPoint.Site.Models.ViewModels.AuthenticationViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -30,14 +31,17 @@ namespace Cornea.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult Signin(string Username, string Password)
+        [ValidateAntiForgeryToken]
+        public IActionResult Signin(SigninViewModel model)
         {
-            var signupResult = _userLoginService.Execute(Username, Password);
-            if (signupResult.IsSuccess == false)
+            if (ModelState.IsValid)
             {
-                return Json(signupResult);
-            }
-            var claims = new List<Claim>()
+                var signupResult = _userLoginService.Execute(model.UserName, model.Password);
+                if (signupResult.IsSuccess == false)
+                {
+                    return View("Signin");
+                }
+                var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, signupResult.Data.UserId.ToString()),
                     new Claim(ClaimTypes.Name, signupResult.Data.Fullname.ToString()),
@@ -45,16 +49,18 @@ namespace Cornea.Site.Controllers
                     new Claim(ClaimTypes.Uri, signupResult.Data.Imagedir.ToString()),
                 };
 
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-            var properties = new AuthenticationProperties()
-            {
-                IsPersistent = true,
-                ExpiresUtc = DateTime.UtcNow.AddMinutes(30),
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                var properties = new AuthenticationProperties()
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(30),
 
-            };
-            HttpContext.SignInAsync(principal, properties);
-            return Json(signupResult);
+                };
+                HttpContext.SignInAsync(principal, properties);
+                return Redirect("Admin/Home/Main");
+            }
+            return View("Signin");
         }
 
         [HttpGet]
@@ -65,6 +71,7 @@ namespace Cornea.Site.Controllers
 
         
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult Signup(SignupViewModel request)
         {
             if (

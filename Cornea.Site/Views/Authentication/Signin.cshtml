@@ -1,4 +1,7 @@
-﻿
+﻿@using Cornea.Site.Models
+@model SigninViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, DNTCaptcha.Core
 @{
     Layout = null;
 }
@@ -89,22 +92,23 @@
                 <div class="content">
 
                     <!-- Advanced login -->
-                    <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <form id="account" asp-controller="Authentication" asp-antiforgery="true" asp-action="Signin" method="post">
                         <div class="login-form">
                             <div class="text-center">
                                 <div class="icon-object border-warning-400 text-warning-400"><i class="icon-people"></i></div>
                                 <h5 class="content-group-lg">Login to your account <small class="display-block">Enter your credentials</small></h5>
                             </div>
-
+                            <span asp-validation-for="UserName" class="text-danger"></span>
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="text" class="form-control input-lg" id="UserName" placeholder="Username">
+                                <input type="text" class="form-control input-lg" asp-for="UserName" id="UserName" placeholder="Username">
                                 <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div>
                             </div>
-
+                            <span asp-validation-for="Password" class="text-danger"></span>
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="password" class="form-control input-lg" id="Password" placeholder="Password">
+                                <input type="password" asp-for="Password" class="form-control input-lg" id="Password" placeholder="Password">
                                 <div class="form-control-feedback">
                                     <i class="icon-lock2 text-muted"></i>
                                 </div>
@@ -126,7 +130,8 @@
                             </div>
 
                             <div class="form-group">
-                                <a onclick="Login()" class="btn bg-pink-400 btn-block btn-lg legitRipple">Login <i class="icon-arrow-right14 position-right"></i></a>
+                                <button type="submit" id="btnsubmit" class="btn bg-pink-400 btn-block btn-lg legitRipple">Login <i class="icon-arrow-right14 position-right"></i></button>
+                                @*<a onclick="Login()" class="btn bg-pink-400 btn-block btn-lg legitRipple">Login <i class="icon-arrow-right14 position-right"></i></a>*@
                             </div>
                             <br />
                             <br />
