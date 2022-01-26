@@ -1,5 +1,4 @@
-﻿
-@using Cornea.Application.Services.Task.Queries.FindTasks
+﻿@using Cornea.Application.Services.Task.Queries.FindTasks
 @using Cornea.Common.Dto
 @model ResultDto<ResultFindTasksService>
 @{
@@ -13,7 +12,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Datatables</span> - Select</h4>
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Tasks</span> - Task Details</h4>
                 <a class="heading-elements-toggle"><i class="icon-more"></i></a>
             </div>
             <div class="heading-elements">
@@ -27,9 +26,9 @@
         <div class="breadcrumb-line breadcrumb-line-component">
             <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
             <ul class="breadcrumb">
-                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li><a href="datatable_extension_select.html">Datatables</a></li>
-                <li class="active">Select</li>
+                <li><a href="index.html"><i class="icon-home2 position-left"></i> Admin</a></li>
+                <li><a href="datatable_extension_select.html">Tasks</a></li>
+                <li class="active">Task Details</li>
             </ul>
             <ul class="breadcrumb-elements">
                 <li><a href="#" class="legitRipple"><i class="icon-comment-discussion position-left"></i> Support</a></li>
@@ -124,7 +123,7 @@
                                         <div class="progress-bar progress-bar-info" style="width:@percent%"></div>
                                     </div>
                                     <br />
-                                    @if(Model.Data.Filedir != null)
+                                    @if(Model.Data.Filedir != "")
                                     {
                                         @foreach (string file in Model.Data.Filedir.Split("$"))
                                         {
@@ -133,8 +132,6 @@
                                             <br />
                                         }
                                     }
-
-
                                 </div>
                             </div>
                         </div>

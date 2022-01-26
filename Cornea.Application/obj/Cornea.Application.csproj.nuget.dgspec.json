@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {}
+    "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {}
   },
   "projects": {
-    "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {
+    "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj",
+        "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj",
         "projectName": "Cornea.Application",
-        "projectPath": "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj",
+        "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj",
         "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-        "outputPath": "D:\\Cornea\\Cornea.Application\\obj\\",
+        "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj": {
-                "projectPath": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj"
+              "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj": {
+                "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj"
               },
-              "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
-                "projectPath": "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj"
+              "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
+                "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj": {
+    "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
+        "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
         "projectName": "Cornea.Common",
-        "projectPath": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
+        "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
         "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-        "outputPath": "D:\\Cornea\\Cornea.Common\\obj\\",
+        "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -129,14 +129,14 @@
         }
       }
     },
-    "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
+    "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj",
+        "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj",
         "projectName": "Cornea.Domain",
-        "projectPath": "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj",
+        "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj",
         "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-        "outputPath": "D:\\Cornea\\Cornea.Domain\\obj\\",
+        "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",

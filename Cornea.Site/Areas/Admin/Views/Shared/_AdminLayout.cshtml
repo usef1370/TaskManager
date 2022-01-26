@@ -468,8 +468,8 @@
                         </div>
                         <div class="navigation-wrapper collapse" id="user-nav">
                             <ul class="navigation">
-                                <li class="@ViewData["itemProfile"]"><a href="/Admin/Home/Profile?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-user-plus"></i>My profile</a></li>
-                                <li class="@ViewData["itemaccountSetting"]"><a href="/Admin/Home/AccountSetting?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-cog5"></i>Account settings</a></li>
+                                <li class="@ViewData["itemProfile"]"><a href="/Admin/MyAccount/Profile?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-user-plus"></i>My profile</a></li>
+                                <li class="@ViewData["itemaccountSetting"]"><a href="/Admin/MyAccount/AccountSetting?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-cog5"></i>Account settings</a></li>
                                 <li><a href="/Authentication/SignOut" class="legitRipple"><i class="icon-switch2"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
@@ -487,14 +487,14 @@
                                 <li>
                                     <a><i class="icon-portfolio"></i> <span>Projects</span></a>
                                     <ul>
-                                        <li class="@ViewData["itemProjects"]"><a href="/Admin/Project/Projects">All Projects</a></li>
+                                        <li class="@ViewData["itemProjects"]"><a href="/Admin/Project/Projects">Projects List</a></li>
                                         <li class="@ViewData["itemAddProject"]"><a href="/Admin/Project/CreateProject">Add Project</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="icon-task"></i> <span>Tasks</span></a>
                                     <ul>
-                                        <li class="@ViewData["itemTasks"]"><a href="/Admin/Task/Tasks">All Tasks</a></li>
+                                        <li class="@ViewData["itemTasks"]"><a href="/Admin/Task/Tasks">Tasks List</a></li>
                                         <li class="@ViewData["itemAddTask"]"><a href="/Admin/Task/CreateTask">Add Task</a></li>
                                     </ul>
                                 </li>
@@ -519,7 +519,7 @@
                                     <ul>
                                         <li class="@ViewData["itemFactors"]"><a href="/Admin/Factor/Factors">Factors List</a></li>
                                         <li class="@ViewData["itemAddFactor"]"><a href="/Admin/Factor/CreateFactor">Add Factor</a></li>
-                                        <li class="@ViewData["itemPersonalInfo"]"><a href="/Admin/Home/PersonalInfo?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value">Personal info</a></li>
+                                        <li class="@ViewData["itemPersonalInfo"]"><a href="/Admin/MyAccount/PersonalInfo?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value">Personal info</a></li>
                                         <li class="@ViewData["itemSourcePage"]"><a href="/Admin/Home/Source">Source page</a></li>
                                     </ul>
                                 </li>

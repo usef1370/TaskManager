@@ -8,9 +8,9 @@ namespace Cornea.Site.Models
 {
     public class SigninViewModel
     {
-        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
+        [Required(ErrorMessage = "Please Enter Your Username")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "گذرواژه را وارد کنید")]
+        [Required(ErrorMessage = "Please Enter Your Password")]
         public string Password { get; set; }
     }
 }

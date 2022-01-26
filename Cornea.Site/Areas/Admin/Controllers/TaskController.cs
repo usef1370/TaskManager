@@ -84,14 +84,14 @@ namespace Cornea.Site.Areas.Admin.Controllers
             return Json(result);
         }
 
-        [HttpPost]
-        public IActionResult findTask(string searchKey)
-        {
-            var result = _findTaskService.Execute(new RequestTasksService { UserId = 0, TaskId = Convert.ToInt32(searchKey) });
-            id = Convert.ToInt32(searchKey);
-            ViewBag.filedir = result.Data.Filedir;
-            return Json(result);
-        }
+        //[HttpPost]
+        //public IActionResult findTask(string searchKey)
+        //{
+        //    var result = _findTaskService.Execute(new RequestTasksService { UserId = 0, TaskId = Convert.ToInt32(searchKey) });
+        //    id = Convert.ToInt32(searchKey);
+        //    //ViewBag.filedir = result.Data.Filedir;
+        //    return Json(result);
+        //}
 
         public IActionResult EditTask(string searchKey)
         {
@@ -130,11 +130,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
         public IActionResult DetailTask(int searchKey)
         {
             var result = _findTaskService.Execute(new RequestTasksService { UserId = 0, TaskId = Convert.ToInt32(searchKey) });
-            if(result.Data.Filedir != null)
-            {
-                ViewBag.filedir = result.Data.Filedir.Split('/')[2];
-            }
-            
             return View(result);
         }
 

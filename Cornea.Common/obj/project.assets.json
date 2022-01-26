@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
+      "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
       "projectName": "Cornea.Common",
-      "projectPath": "D:\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
+      "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\Cornea.Common.csproj",
       "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-      "outputPath": "D:\\Cornea\\Cornea.Common\\obj\\",
+      "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",

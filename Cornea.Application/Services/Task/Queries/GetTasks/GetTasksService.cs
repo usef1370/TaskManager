@@ -12,12 +12,12 @@ namespace Cornea.Application.Services.Task.Queries.GetTasks
         {
             _context = context;
         }
-        public ResultGetTasksDto Execute(int searchKey)
+        public ResultGetTasksDto Execute(string searchKey)
         {
             var tasks = _context.AllTasks.AsQueryable();
-            if (searchKey >=0)
+            if (!string.IsNullOrWhiteSpace(searchKey))
             {
-                tasks = tasks.Where(p => p.UserId == searchKey);
+                tasks = tasks.Where(p => p.UserId == Convert.ToInt32(searchKey));
             }
             var tasksList = tasks.Select(p => new ResultGetTasks
             {

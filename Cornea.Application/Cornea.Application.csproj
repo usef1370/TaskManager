@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Services\Home\Commands\" />
     <Folder Include="Services\Home\Queries\" />
-    <Folder Include="Services\Users\Queries\SignIn\" />
   </ItemGroup>
 
 </Project>

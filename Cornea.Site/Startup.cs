@@ -27,7 +27,7 @@ using Cornea.Application.Services.Task.Queries.FindTasks;
 using Cornea.Application.Services.Task.Queries.GetTasks;
 using Cornea.Application.Services.Users.Commands.DeleteUser;
 using Cornea.Application.Services.Users.Commands.EditUser;
-using Cornea.Application.Services.Users.Commands.LoginUser;
+using Cornea.Application.Services.Users.Queries.Signin;
 using Cornea.Application.Services.Users.Commands.RegisterUsers;
 using Cornea.Application.Services.Users.Queries.FindUsers;
 using Cornea.Application.Services.Users.Queries.GetRoles;

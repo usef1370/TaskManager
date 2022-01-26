@@ -6331,11 +6331,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Cornea\\Cornea.Persistence\\Cornea.Persistence.csproj",
+      "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Persistence\\Cornea.Persistence.csproj",
       "projectName": "Cornea.Persistence",
-      "projectPath": "D:\\Cornea\\Cornea.Persistence\\Cornea.Persistence.csproj",
+      "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Persistence\\Cornea.Persistence.csproj",
       "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-      "outputPath": "D:\\Cornea\\Cornea.Persistence\\obj\\",
+      "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6352,11 +6352,11 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "projectReferences": {
-            "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {
-              "projectPath": "D:\\Cornea\\Cornea.Application\\Cornea.Application.csproj"
+            "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj": {
+              "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Application\\Cornea.Application.csproj"
             },
-            "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
-              "projectPath": "D:\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj"
+            "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj": {
+              "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Domain\\Cornea.Domain.csproj"
             }
           }
         }
