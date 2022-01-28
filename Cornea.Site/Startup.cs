@@ -77,6 +77,7 @@ namespace Cornea.Site
 
             services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
+            services.AddScoped<IAddUsersService, AddUsersService>();
             services.AddScoped<IFindUsersService, FindUsersService>();
             services.AddScoped<IEditUserService, EditUserService>();
             services.AddScoped<IGetRolesService, GetRolesService>();
@@ -97,6 +98,7 @@ namespace Cornea.Site
             services.AddScoped<IGetTasksService, GetTasksService>();
             services.AddScoped<IAddTaskService, AddTaskService>();
             services.AddScoped<IEditTaskService, EditTaskService>();
+            services.AddScoped<IEditStatusService, EditStatusService>();
             services.AddScoped<IFindTasksService, FindTasksService>();
             services.AddScoped<IDeleteTaskService,DeleteTaskService>();
 

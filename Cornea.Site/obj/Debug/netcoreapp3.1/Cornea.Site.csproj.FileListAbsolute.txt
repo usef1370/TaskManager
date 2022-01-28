@@ -8973,3 +8973,5 @@ F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Cornea.
 F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Cornea.Site.dll
 F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Cornea.Site.pdb
 F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Cornea.Site.genruntimeconfig.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\MyAccount\ChangePassword.cshtml.g.cs
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Site\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\AddNewUser.cshtml.g.cs

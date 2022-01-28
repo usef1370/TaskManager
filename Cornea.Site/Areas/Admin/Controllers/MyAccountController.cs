@@ -30,6 +30,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
         private readonly IEditUserService _editUserService;
         private readonly IGetTasksService _getTasksService;
         private readonly IEditTaskService _editTaskService;
+        private readonly IEditStatusService _editStatusService;
         private readonly ISaveFileDirection _saveFileDirection;
         private readonly IChangePasswordService _changePasswordService;
         public MyAccountController(IGetUsersService getUsersService
@@ -40,6 +41,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
             , IRegisterUserService registerUserService
             , IGetTasksService getTasksService
             , IEditTaskService editTaskService
+            , IEditStatusService editStatusService
             , IChangePasswordService changePasswordService
             , ISaveFileDirection saveFileDirection)
         {
@@ -51,6 +53,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
             _editUserService = editUserService;
             _getTasksService = getTasksService;
             _editTaskService = editTaskService;
+            _editStatusService = editStatusService;
             _changePasswordService = changePasswordService;
             _saveFileDirection = saveFileDirection;
         }
@@ -89,7 +92,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
 
         public IActionResult PersonalInfo(string searchKey)
         {
-            ViewBag.activeItem = "itemPersonalInfo";
+            ViewBag.activeItem = "itemPersonalInfo";//itemChangePassword
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return View(_findUsersService.Execute(Convert.ToInt32(searchKey)));
         }
@@ -172,6 +175,12 @@ namespace Cornea.Site.Areas.Admin.Controllers
             return FilePath.Substring(0, FilePath.Length - 1);
         }
 
+        public IActionResult ChangePassword(string searchKey)
+        {
+            ViewBag.activeItem = "itemChangePassword";
+            return View(_findUsersService.Execute(Convert.ToInt32(searchKey)));
+        }
+
         [HttpPost]
         public IActionResult ChangePassword(string NewPassword, string ConfirmPassword)
         {
@@ -180,6 +189,17 @@ namespace Cornea.Site.Areas.Admin.Controllers
                 UserId = Convert.ToInt64(User.FindFirstValue(ClaimTypes.NameIdentifier)),
                 NewPassword = NewPassword,
                 ConfirmPassword = ConfirmPassword,
+            });
+            return Json(result);
+        }
+
+        [HttpPost]
+        public IActionResult EditStatus(string TaskId, string Status)
+        {
+            var result = _editStatusService.Execute(new RequestEditStatusService
+            {
+                Id = Convert.ToInt64(TaskId),
+                Status = Status,
             });
             return Json(result);
         }

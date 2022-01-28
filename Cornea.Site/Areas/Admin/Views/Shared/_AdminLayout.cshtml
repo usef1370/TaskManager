@@ -4,7 +4,7 @@
 @{
     Layout = null;
     ViewData["itemProfile"] = "";
-    ViewData["itemaccountSetting"] = "";
+    ViewData["itemChangePassword"] = "";
     ViewData["itemDashboard"] = "";
     ViewData["itemProjects"] = "";
     ViewData["itemAddProject"] = "";
@@ -23,8 +23,8 @@
         case "Profile":
             ViewData["Profile"] = "active";
             break;
-        case "accountSetting":
-            ViewData["accountSetting"] = "active";
+        case "itemChangePassword":
+            ViewData["itemChangePassword"] = "active";
             break;
         case "itemDashboard":
             ViewData["itemDashboard"] = "active";
@@ -469,7 +469,8 @@
                         <div class="navigation-wrapper collapse" id="user-nav">
                             <ul class="navigation">
                                 <li class="@ViewData["itemProfile"]"><a href="/Admin/MyAccount/Profile?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-user-plus"></i>My profile</a></li>
-                                <li class="@ViewData["itemaccountSetting"]"><a href="/Admin/MyAccount/AccountSetting?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-cog5"></i>Account settings</a></li>
+                                <li class="@ViewData["itemPersonalInfo"]"><a href="/Admin/MyAccount/PersonalInfo?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value"><i class="icon-profile"></i>Personal info</a></li>
+                                <li class="@ViewData["itemChangePassword"]"><a href="/Admin/MyAccount/ChangePassword?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-cog5"></i>Change Password</a></li>
                                 <li><a href="/Authentication/SignOut" class="legitRipple"><i class="icon-switch2"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
@@ -519,8 +520,14 @@
                                     <ul>
                                         <li class="@ViewData["itemFactors"]"><a href="/Admin/Factor/Factors">Factors List</a></li>
                                         <li class="@ViewData["itemAddFactor"]"><a href="/Admin/Factor/CreateFactor">Add Factor</a></li>
-                                        <li class="@ViewData["itemPersonalInfo"]"><a href="/Admin/MyAccount/PersonalInfo?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value">Personal info</a></li>
+                                    </ul>
+                                </li>
+                                <li class="navigation-header"><span>Source</span> <i class="icon-menu" title="Tables"></i></li>
+                                <li>
+                                    <a><i class="icon-users4"></i> <span>Source</span></a>
+                                    <ul>
                                         <li class="@ViewData["itemSourcePage"]"><a href="/Admin/Home/Source">Source page</a></li>
+                                        <li class="@ViewData["itemRegister"]"><a href="/Admin/Home/AddNewUser">Add User</a></li>
                                     </ul>
                                 </li>
                             </ul>
