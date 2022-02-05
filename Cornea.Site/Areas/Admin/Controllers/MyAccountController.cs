@@ -182,11 +182,12 @@ namespace Cornea.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangePassword(string NewPassword, string ConfirmPassword)
+        public IActionResult ChangePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
         {
             var result = _changePasswordService.Execute(new RequestChangePasswordService
             {
-                UserId = Convert.ToInt64(User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                CurrentPassword = CurrentPassword,
                 NewPassword = NewPassword,
                 ConfirmPassword = ConfirmPassword,
             });

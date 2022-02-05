@@ -3,6 +3,7 @@ using Cornea.Common.Dto;
 using Cornea.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Cornea.Application.Services.Product.Commands.DeleteProduct
@@ -18,11 +19,32 @@ namespace Cornea.Application.Services.Product.Commands.DeleteProduct
         {
             _context = context;
         }
+        //public ResultDto Execute(long Id)
+        //{
+        //    Products product = new Products() { Id = Id };
+        //    _context.Products.Attach(product);
+        //    _context.Products.Remove(product);
+        //    _context.SaveChanges();
+        //    return new ResultDto
+        //    {
+        //        IsSuccess = true,
+        //        Message = "Deleted Successfully"
+        //    };
+        //}
         public ResultDto Execute(long Id)
         {
-            Products product = new Products() { Id = Id };
-            _context.Products.Attach(product);
-            _context.Products.Remove(product);
+            var product = _context.Products.SingleOrDefault(b => b.Id == Id);
+
+            if (product == null)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "Deleted failed"
+                };
+            }
+
+            product.Status = false;
             _context.SaveChanges();
             return new ResultDto
             {

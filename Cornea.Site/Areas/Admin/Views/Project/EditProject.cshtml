@@ -117,6 +117,14 @@
     function Save() {
         var ProjectId = $("#ProjectId").val();
         var ProjectName = $("#ProjectName").val();
+        if (ProjectName.length == 0) {
+            swal.fire(
+                'Warning',
+                'Please enter a project name',
+                'warning'
+            );
+            return;
+        }
         var Status = document.getElementById("Status").value;
         var Priority = document.getElementById("Priority").value;
         var DateRange = $("#DateRange").val();

@@ -1,52 +1,184 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script type="text/javascript">
-        window.onload = function () {
-            var clicks = 0;
-            var lastClick = [0, 0];
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cropper.js</title>
+    @*<link href="~/CropImage/css/cropper.css" rel="stylesheet" />*@
+    <link href="~/CropImage/css/cropper.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/AdminTemplate/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/AdminTemplate/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/AdminTemplate/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/AdminTemplate/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/AdminTemplate/assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script src="~/CropImage/js/cropper.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/forms/inputs/alpaca/alpaca.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/forms/inputs/alpaca/price_format.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/ui/prism.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/forms/styling/uniform.min.js"></script>
 
-            var canvas = document.getElementById('exemploCanvas');
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/pages/alpaca_advanced.js"></script>
 
-            canvas.addEventListener('click', draw, false);
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/ui/ripple.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/plugins/notifications/sweet_alert.min.js"></script>
 
-            function draw(e) {
-                ctx = this.getContext('2d');
+    <script type="text/javascript" src="~/AdminTemplate/assets/js/pages/components_modals.js"></script>
 
-                x = getClick(e)[0]; // - this.offsetLeft;
-                y = getClick(e)[1]; // - this.offsetTop;
 
-                if (clicks != 1) {
-                    clicks++;
-                } else {
-                    ctx.beginPath();
-                    ctx.moveTo(lastClick[0], lastClick[1]);
-                    ctx.lineTo(x, y, 6);
-
-                    ctx.strokeStyle = '#000000';
-                    ctx.stroke()
-
-                    clicks = 0;
-                }
-                lastClick = [x, y];
-            }
-
-            function getClick(e) {
-                var x, y;
-
-                if (e.pageX != undefined && e.pageY != undefined) {
-                    x = e.pageX;
-                    y = e.pageY;
-                } else {
-                    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                }
-
-                return [x, y];
-            }
+    <style>
+        .container {
+            margin: 10px auto;
+            max-width: 700px;
+            max-height: 100%;
+            object-fit: cover;
         }
-    </script>
+
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="exemploCanvas" width="800" height="600" style="background-color: #EEEEEE;"></canvas>
+    <div class="container">
+        <div>
+            <img id="image_preview" class="img-preview">
+        </div>
+        <div class="form-group">
+            <div id="alpaca-file-styled"></div>
+            <a href="#alpaca-file-styled-source" id="Imagedir" required="required" data-toggle="collapse"></a>
+        </div>
+    </div>
+    <!-- Horizontal form modal -->
+    <div id="modal_form_horizontal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Profile photo</h5>
+                </div>
+
+                <form action="#" class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <img id="image" alt="Picture">
+                                    <br />
+                                    <button type="button" class="btn-sm btn-success" onclick="Crop()">Crop</button>
+                                </div>
+                                <div class="col-md-5">
+                                    <img id="crop_preview" style="border: 3px solid #555;width: 100px;max-height:100%;" class="img-preview">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /horizontal form modal -->
+    <script src="~/CropImage/js/cropper.js"></script>
+
+    <script>
+        var image = document.getElementById('image');
+        var cropImage = document.getElementById('crop_preview');
+        var image_preview = document.getElementById('image_preview');
+        var croppable = false;
+        var cropper;
+        $("#alpaca-file-styled").alpaca({
+            "data": "",
+
+            "options": {
+                "type": "file",
+                "label": "Product Photo:",
+                "helper": "Pick your product picture.",
+                "id": "file-styled",
+                "name": "files"
+            },
+            "schema": {
+                "type": "string",
+                "format": "uri"
+            },
+            "postRender": function (control) {
+                $("#file-styled").uniform({
+                    fileButtonClass: 'action btn bg-blue'
+                });
+            }
+        });
+
+        $('#file-styled').on('change', function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result);
+                    $('#crop_preview')
+                        .attr('src', e.target.result);
+
+                    //if (cropper == null) {
+                        AddCropper();
+                    //}
+                };
+
+                reader.readAsDataURL(this.files[0]);
+                
+                $('#modal_form_horizontal').modal('show');
+                
+            }
+        });
+        $(document).on('submit', 'click', function () {
+            //function () {
+                $.modal.close();
+        });
+
+        function AddCropper() {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 1,
+                ready: function () {
+                    croppable = true;
+                },
+            });
+        }
+
+        function Crop() {
+            var croppedCanvas;
+
+            if (!croppable) {
+                return;
+            }
+
+            // Crop
+            croppedCanvas = cropper.getCroppedCanvas();
+
+            // Show
+            cropImage.src = croppedCanvas.toDataURL();
+            image_preview.src = croppedCanvas.toDataURL();
+
+        }
+
+    </script>
 </body>
 </html>

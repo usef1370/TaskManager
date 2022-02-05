@@ -136,9 +136,6 @@
 </div>
 <!-- /main content -->
 
-
-<link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-<script src="~/Sweetalert2/sweetalert2.min.js"></script>
 <script>
     function deleteTask(searchKey) {
         // Advanced initialization
@@ -171,12 +168,14 @@
 
                     }
                 }
+
             });
 
         });
 
     }
 </script>
+
 <script>
     function findTask(searchKey) {
         var postData = {
@@ -196,7 +195,6 @@
                     document.getElementById("Status").value = data.data.taskName;
                     document.getElementById("Priority").value = data.data.taskName;
                     //document.getElementById("Filedir").value = data.data.filedir;
-
                     $("#modal_form_horizontal").modal('show');
                 }
                 else {
@@ -219,6 +217,7 @@
         });
     }
 </script>
+
 <script type="text/javascript">
     function performClick(elemId) {
         var elem = document.getElementById(elemId);

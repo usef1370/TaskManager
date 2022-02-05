@@ -17,6 +17,7 @@ namespace Cornea.Application.Services.Product.Commands.AddProduct
         public string Price { get; set; }
         public string Number { get; set; }
         public string Imagedir { get; set; }
+        public string Status { get; set; }
     }
     public class AddProductService : IAddProductService
     {
@@ -64,7 +65,8 @@ namespace Cornea.Application.Services.Product.Commands.AddProduct
                 Name = request.Name,
                 Price = request.Price,
                 Number = request.Number,
-                Imagedir = request.Imagedir
+                Imagedir = request.Imagedir,
+                Status = true
             };
 
             _context.Products.Add(products);

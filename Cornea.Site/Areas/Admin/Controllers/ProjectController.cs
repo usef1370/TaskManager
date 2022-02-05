@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Cornea.Application.Services.Project.Commands.AddProject;
 using Cornea.Application.Services.Project.Commands.DeleteProject;
 using Cornea.Application.Services.Project.Commands.EditProject;
@@ -19,7 +16,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
         private readonly IEditProjectService _editProjectService;
         private readonly IFindProjectsService _findProjectsService;
         private readonly IDeleteProjectService _deleteProjectService;
-        static int id = 0;
 
         public ProjectController( IGetProjectsService getProjectsService
             , IAddProjectService addProjectService
@@ -34,6 +30,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
             _deleteProjectService = deleteProjectService;
 
         }
+       
         public IActionResult Projects()
         {
             ViewBag.activeItem = "itemProjects";
@@ -45,6 +42,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
             ViewBag.activeItem = "itemAddProject";
             return View();
         }
+        
         [HttpPost]
         public IActionResult CreateProject(string ProjectName, string Status, string Priority, string DateRange, string Message)
         {
@@ -61,17 +59,13 @@ namespace Cornea.Site.Areas.Admin.Controllers
             return Json(result);
         }
 
-        [HttpPost]
-        public IActionResult findProject(string searchKey)
-        {
-            var result = _findProjectsService.Execute(Convert.ToInt32(searchKey));
-            id = Convert.ToInt32(searchKey);
-            return Json(result);
-        }
-
         public IActionResult EditProject(string searchKey)
         {
-            var result = _findProjectsService.Execute(Convert.ToInt32(searchKey));
+            var result = _findProjectsService.Execute(searchKey);
+            if (!result.IsSuccess)
+            {
+                return Redirect("Projects");
+            }
             ViewBag.status = result.Data.Status;
             return View(result);
         }
@@ -93,12 +87,10 @@ namespace Cornea.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult deleteProject(string searchKey)
+        public IActionResult DeleteProject(string searchKey)
         {
-            var result = _deleteProjectService.Execute(Convert.ToInt32(searchKey));
-            id = Convert.ToInt32(searchKey);
+            var result = _deleteProjectService.Execute(searchKey);
             return Json(result);
         }
     }
-
 }

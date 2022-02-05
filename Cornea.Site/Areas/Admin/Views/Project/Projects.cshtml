@@ -76,7 +76,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach (var data in Model.projectslist)
                         {
                             long? percent = 0;
@@ -87,7 +86,7 @@
                                 <td>@data.FinishTime.ToString("yyyy-MM-dd")</td>
                                 <td><span class="label label-danger">@data.Status</span></td>
                                 <td>@data.Priority</td>
-                                <td hidden="hidden">@data.Id</td>
+                                <td hidden="hidden">"gg"</td>
 
                                 <td>
                                     <div class="progress progress-rounded" id="h-center-basic">
@@ -110,10 +109,11 @@
                                         <div class="progress-bar progress-bar-info" style="width:@percent%"></div>
                                     </div>
                                 </td>
+
                                 <td class="text-center ">
                                     <ul class="icons-list">
                                         <li class="text-primary-600"><a href="EditProject?searchKey=@data.Id"><i class="icon-pencil7"></i></a></li>
-                                        <li class="text-danger-600"><a onclick="deleteProject(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
+                                        <li class="text-danger-600"><a onclick="DeleteProject(String(@data.Id))" href="#"><i class="icon-trash"></i></a></li>
                                     </ul>     
                                 </td>
                             </tr>
@@ -127,7 +127,7 @@
     </div>
 <!-- /main content -->
 <script>
-    function deleteProject(searchKey) {
+    function DeleteProject(searchKey) {
         // Advanced initialization
         swal({
             title: "Are you sure?",
@@ -146,7 +146,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "deleteProject",
+                url: "DeleteProject",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {
@@ -154,7 +154,7 @@
                             title: "Deleted!",
                             text: "Your imaginary file has been deleted.",
                             type: "success"
-                        }, function () { window.location.href("Projects"); });
+                        }, function () { window.location.reload(); });
 
                     }
                 }

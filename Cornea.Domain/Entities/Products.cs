@@ -17,6 +17,7 @@ namespace Cornea.Domain.Entities
         public string Number { get; set; }
         [Required]
         public string Imagedir { get; set; }
+        public bool Status { get; set; }
 
     }
 }

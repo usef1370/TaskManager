@@ -7,5 +7,6 @@
         public string Price { get; set; }
         public string Number { get; set; }
         public string Imagedir { get; set; }
+        public bool Status { get; set; }
     }
 }

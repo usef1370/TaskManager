@@ -53,6 +53,7 @@ namespace Cornea.Application.Services.Product.Commands.EditProduct
                 products.Price = request.Price;
                 products.Number = request.Number;
                 if(request.Imagedir != null) products.Imagedir = request.Imagedir;
+                products.Status = request.Status;
 
                 _context.SaveChanges();
             }
@@ -71,5 +72,6 @@ namespace Cornea.Application.Services.Product.Commands.EditProduct
         public string Price { get; set; }
         public string Number { get; set; }
         public string Imagedir { get; set; }
+        public bool Status { get; set; }
     }
 }

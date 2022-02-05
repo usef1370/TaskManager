@@ -3,6 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = null;
+    ViewData["itemMyAccount"] = "";
     ViewData["itemProfile"] = "";
     ViewData["itemChangePassword"] = "";
     ViewData["itemDashboard"] = "";
@@ -18,13 +19,20 @@
     ViewData["itemAddFactor"] = "";
     ViewData["itemPersonalInfo"] = "";
     ViewData["itemSourcePage"] = "";
+    ViewData["itemAddUser"] = "";
     switch (ViewBag.activeItem)
     {
-        case "Profile":
-            ViewData["Profile"] = "active";
+        case "itemProfile":
+            ViewData["itemProfile"] = "active";
+            ViewData["itemMyAccount"] = "in";
             break;
         case "itemChangePassword":
             ViewData["itemChangePassword"] = "active";
+            ViewData["itemMyAccount"] = "in";
+            break;
+        case "itemPersonalInfo":
+            ViewData["itemPersonalInfo"] = "active";
+            ViewData["itemMyAccount"] = "in";
             break;
         case "itemDashboard":
             ViewData["itemDashboard"] = "active";
@@ -59,11 +67,11 @@
         case "itemAddFactor":
             ViewData["itemAddFactor"] = "active";
             break;
-        case "itemPersonalInfo":
-            ViewData["itemPersonalInfo"] = "active";
-            break;
         case "itemSourcePage":
             ViewData["itemSourcePage"] = "active";
+            break;
+        case "itemAddUser":
+            ViewData["itemAddUser"] = "active";
             break;
     }
 }
@@ -466,7 +474,7 @@
                                 <a href="#user-nav" data-toggle="collapse"><span>My account</span> <i class="caret"></i></a>
                             </div>
                         </div>
-                        <div class="navigation-wrapper collapse" id="user-nav">
+                        <div class="navigation-wrapper collapse @ViewData["itemMyAccount"]" id="user-nav">
                             <ul class="navigation">
                                 <li class="@ViewData["itemProfile"]"><a href="/Admin/MyAccount/Profile?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="legitRipple"><i class="icon-user-plus"></i>My profile</a></li>
                                 <li class="@ViewData["itemPersonalInfo"]"><a href="/Admin/MyAccount/PersonalInfo?searchKey=@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value"><i class="icon-profile"></i>Personal info</a></li>
@@ -526,8 +534,8 @@
                                 <li>
                                     <a><i class="icon-users4"></i> <span>Source</span></a>
                                     <ul>
-                                        <li class="@ViewData["itemSourcePage"]"><a href="/Admin/Home/Source">Source page</a></li>
-                                        <li class="@ViewData["itemRegister"]"><a href="/Admin/Home/AddNewUser">Add User</a></li>
+                                        <li class="@ViewData["itemSourcePage"]"><a href="/Admin/Source/Source">Source page</a></li>
+                                        <li class="@ViewData["itemAddUser"]"><a href="/Admin/Source/AddUser">Add User</a></li>
                                     </ul>
                                 </li>
                             </ul>

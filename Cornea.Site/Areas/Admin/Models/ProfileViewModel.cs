@@ -28,5 +28,7 @@ namespace Cornea.Site.Areas.Admin.Models
         public IFormFile[] Resumedir { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Repeatpassword { get; set; }
+
     }
 }

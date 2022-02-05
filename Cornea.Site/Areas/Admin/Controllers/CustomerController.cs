@@ -68,30 +68,10 @@ namespace Cornea.Site.Areas.Admin.Controllers
             return Json(result);
         }
 
-        //[HttpPost]
-        //public IActionResult findCustomer(string searchKey)
-        //{
-        //    var result = _findCustomersService.Execute(Convert.ToInt32(searchKey));
-        //    id = Convert.ToInt32(searchKey);
-        //    return Json(result);
-        //}
-
         public IActionResult EditCustomer(string searchKey)
         {
             var item1 = _findCustomersService.Execute(Convert.ToInt32(searchKey));
-            var item2 = _getProductsService.Execute();
-            int i = 0;
-            foreach (var item in item2.productslist)
-            {
-                if (item.Name == item1.Data.ProductName)
-                {
-                    break;
-                }
-                i++;
-            }
-            item2.productslist.RemoveAt(i);
-            Tuple<ResultDto<ResultFindCustomersService>, ResultGetProductsDto> _tuple = new Tuple<ResultDto<ResultFindCustomersService>, ResultGetProductsDto>(item1, item2);
-            return View(_tuple);
+            return View(item1);
         }
 
         [HttpPost]
@@ -116,7 +96,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
         public IActionResult deleteCustomer(string searchKey)
         {
             var result = _deleteCustomerService.Execute(Convert.ToInt32(searchKey));
-            id = Convert.ToInt32(searchKey);
             return Json(result);
         }
 

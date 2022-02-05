@@ -115,3 +115,12 @@ D:\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.A
 D:\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.csproj.CoreCompileInputs.cache
 D:\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.dll
 D:\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.pdb
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\bin\Debug\netstandard2.0\Cornea.Infrastructure.deps.json
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\bin\Debug\netstandard2.0\Cornea.Infrastructure.dll
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\bin\Debug\netstandard2.0\Cornea.Infrastructure.pdb
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.csprojAssemblyReference.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.AssemblyInfoInputs.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.AssemblyInfo.cs
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.csproj.CoreCompileInputs.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.dll
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Infrastructure\obj\Debug\netstandard2.0\Cornea.Infrastructure.pdb

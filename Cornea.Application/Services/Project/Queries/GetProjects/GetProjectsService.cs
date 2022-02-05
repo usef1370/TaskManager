@@ -7,10 +7,12 @@ namespace Cornea.Application.Services.Project.Queries.GetProjects
     public class GetProjectsService : IGetProjectsService
     {
         private readonly IDataBaseContext _context;
+        
         public GetProjectsService(IDataBaseContext context)
         {
             _context = context;
         }
+        
         public ResultGetProjecsDto Execute()
         {
             var projects = _context.Projects.AsQueryable();
@@ -32,6 +34,5 @@ namespace Cornea.Application.Services.Project.Queries.GetProjects
                 projectslist = projectsList
             };
         }
-
     }
 }

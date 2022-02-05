@@ -1,4 +1,5 @@
 ﻿using Cornea.Application.Interfaces.Contexts;
+using Cornea.Common;
 using Cornea.Common.Dto;
 using Cornea.Domain.Entities;
 
@@ -13,7 +14,14 @@ namespace Cornea.Application.Services.Users.Commands.RegisterUsers
         }
         public ResultDto Execute(RequestAddUsersService request)
         {
-
+            if (request.Password != request.Repeatpassword)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "password and confirm password must be same"
+                };
+            }
             LoginInfo users = new LoginInfo()
             {
                 RoleId = request.RoleId,
@@ -36,7 +44,7 @@ namespace Cornea.Application.Services.Users.Commands.RegisterUsers
                 FinishLastjobTime = request.FinishLastjobTime,
                 AdditionalInfo = request.AdditionalInfo,
                 Resumedir = request.Resumedir,
-                Password = request.Password,
+                Password = PasswordHasher.SHA256_Hash(request.Password),
                 UserName = request.Username,
             };
 

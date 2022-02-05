@@ -12,15 +12,17 @@ namespace Cornea.Application.Services.Product.Queries.GetProduct
         }
         public ResultGetProductsDto Execute()
         {
-            var products = _context.Products.AsQueryable();
+            var products = _context.Products.Where(p => p.Status == true);
             var productsList = products.Select(p => new ResultGetProducts
             {
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
                 Number = p.Number,
-                Imagedir = p.Imagedir
+                Imagedir = p.Imagedir,
+                Status = p.Status
             }).ToList();
+
             return new ResultGetProductsDto
             {
                 productslist = productsList

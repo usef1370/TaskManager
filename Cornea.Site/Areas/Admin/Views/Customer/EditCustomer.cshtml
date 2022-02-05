@@ -1,7 +1,6 @@
 ﻿@using Cornea.Application.Services.Customer.Queries.FindCustomers
-@using Cornea.Application.Services.Product.Queries.GetProduct
 @using Cornea.Common.Dto
-@model Tuple<ResultDto<ResultFindCustomersService>, ResultGetProductsDto>;
+@model ResultDto<ResultFindCustomersService>;
 @{
     ViewData["Title"] = "EditCustomer";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -62,55 +61,48 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Customer Name:</label>
-                                <input type="text" class="form-control" id="Name" value="@Model.Item1.Data.Name" placeholder="Enter customer name">
+                                <input type="text" class="form-control" id="Name" value="@Model.Data.Name" placeholder="Enter customer name">
                             </div>
                             <br />
                             <div class="form-group" hidden="hidden">
-                                <input type="text" class="form-control" id="_id" name="_id" value="@Model.Item1.Data.Id">
+                                <input type="text" class="form-control" id="_id" name="_id" value="@Model.Data.Id">
                             </div>
                             <div class="form-group">
                                 <label>Lab Name:</label>
-                                <input type="text" class="form-control" id="LabName" value="@Model.Item1.Data.LabName" placeholder="Enter lab name">
+                                <input type="text" class="form-control" id="LabName" value="@Model.Data.LabName" placeholder="Enter lab name">
                             </div>
                             <br />
                             <div class="form-group">
                                 <label>Customer Phone:</label>
-                                <input type="text" class="form-control" id="Phone" value="@Model.Item1.Data.Phone" placeholder="Enter customer phone">
+                                <input type="text" class="form-control" id="Phone" value="@Model.Data.Phone" placeholder="Enter customer phone">
                             </div>
                             <br />
                             <div class="form-group">
                                 <label>Number:</label>
-                                <input type="text" class="form-control" id="Number" value="@Model.Item1.Data.Number" placeholder="Enter number">
+                                <input type="text" class="form-control" id="Number" value="@Model.Data.Number" placeholder="Enter number">
                             </div>
                             <br />
                             <div class="form-group">
                                 <label>Product name:</label>
-                                @*<input type="text" class="form-control" id="ProductName" value="@Model.Item2.Data.ProductName" placeholder="Enter number">*@
-                            <select class="select" id="ProductName">
-                                <option>@Model.Item1.Data.ProductName</option>
-                                @foreach (var data in Model.Item2.productslist)
-                                {
-                                    <option>@data.Name</option>
-                                }
-                            </select>
+                                <input type="text" id="ProductName" readonly="readonly" value="@Model.Data.ProductName" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>City:</label>
-                                <input type="text" class="form-control" id="City" value="@Model.Item1.Data.City" placeholder="Enter customer city">
+                                <input type="text" class="form-control" id="City" value="@Model.Data.City" placeholder="Enter customer city">
                             </div>
                             <br />
                             <div class="form-group">
                                 <label>Address:</label>
-                                <input rows="2" class="form-control" id="Address" value="@Model.Item1.Data.Address" placeholder="Enter address" />
+                                <input rows="2" class="form-control" id="Address" value="@Model.Data.Address" placeholder="Enter address" />
                             </div>
                             <br />
                             <div class="form-group">
                                 <label>Sale Date: </label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-calendar22"></i></span>
-                                    <input type="text" id="SaleDate" value="@Model.Item1.Data.SaleDate" class="form-control daterange-single">
+                                    <input type="text" id="SaleDate" value="@Model.Data.SaleDate" class="form-control daterange-single">
                                 </div>
                             </div>
                         </div>

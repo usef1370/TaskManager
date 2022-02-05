@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cornea.Site.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
     public class TaskController : Controller
     {
         private IWebHostEnvironment Environment;
@@ -25,7 +24,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
         private readonly IFindTasksService _findTaskService;
         private readonly IGetProjectsService _getProjectsService;
         private readonly IGetUsersService _getUsersService;
-        static int id = 0;
 
 
         public TaskController(IGetTasksService getTasksService
@@ -46,6 +44,7 @@ namespace Cornea.Site.Areas.Admin.Controllers
             _getUsersService = getUsersService;
             Environment = _environment;
         }
+        
         public IActionResult Tasks()
         {
             ViewBag.activeItem = "itemTasks";
@@ -84,15 +83,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
             return Json(result);
         }
 
-        //[HttpPost]
-        //public IActionResult findTask(string searchKey)
-        //{
-        //    var result = _findTaskService.Execute(new RequestTasksService { UserId = 0, TaskId = Convert.ToInt32(searchKey) });
-        //    id = Convert.ToInt32(searchKey);
-        //    //ViewBag.filedir = result.Data.Filedir;
-        //    return Json(result);
-        //}
-
         public IActionResult EditTask(string searchKey)
         {
             var item1 = _findTaskService.Execute(new RequestTasksService { UserId = 0, TaskId = Convert.ToInt32(searchKey) });
@@ -123,7 +113,6 @@ namespace Cornea.Site.Areas.Admin.Controllers
         public IActionResult deleteTask(string searchKey)
         {
             var result = _deleteTaskService.Execute(Convert.ToInt32(searchKey));
-            id = Convert.ToInt32(searchKey);
             return Json(result);
         }
 

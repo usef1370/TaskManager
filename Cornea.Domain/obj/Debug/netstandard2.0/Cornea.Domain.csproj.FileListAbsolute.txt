@@ -169,3 +169,12 @@ D:\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.AssemblyInfo.cs
 D:\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.csproj.CoreCompileInputs.cache
 D:\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.dll
 D:\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.pdb
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\bin\Debug\netstandard2.0\Cornea.Domain.deps.json
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\bin\Debug\netstandard2.0\Cornea.Domain.dll
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\bin\Debug\netstandard2.0\Cornea.Domain.pdb
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.csprojAssemblyReference.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.AssemblyInfoInputs.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.AssemblyInfo.cs
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.csproj.CoreCompileInputs.cache
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.dll
+F:\DuratInstruments\Cornea\V1\Cornea\Cornea.Domain\obj\Debug\netstandard2.0\Cornea.Domain.pdb

@@ -1,6 +1,7 @@
 ﻿using Cornea.Application.Interfaces.Contexts;
 using Cornea.Common;
 using Cornea.Common.Dto;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace Cornea.Application.Services.Users.Commands.EditUser
     }
     public class RequestChangePasswordService
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
+        public string CurrentPassword { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }
     }
@@ -27,7 +29,16 @@ namespace Cornea.Application.Services.Users.Commands.EditUser
         }
         public ResultDto Execute(RequestChangePasswordService request)
         {
-            if(request.NewPassword!= request.ConfirmPassword)
+            if (string.IsNullOrWhiteSpace(request.CurrentPassword) || string.IsNullOrWhiteSpace(request.NewPassword) || string.IsNullOrWhiteSpace(request.ConfirmPassword))
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = "Please fill all field",
+                };
+            }
+
+            if (request.NewPassword != request.ConfirmPassword)
             {
                 return new ResultDto
                 {
@@ -35,17 +46,29 @@ namespace Cornea.Application.Services.Users.Commands.EditUser
                     Message = "newpassword and confirm password must be same"
                 };
             }
-            var users = _context.LoginInfo.SingleOrDefault(b => b.UserId == request.UserId);
 
-            if (users == null)
+            var user = _context.LoginInfo.Where(p => p.UserId.Equals(Convert.ToInt16(request.UserId))).FirstOrDefault();
+
+            if (user == null)
             {
-                return new ResultDto
+                return new ResultDto()
                 {
                     IsSuccess = false,
-                    Message = "you are unknown :D"
+                    Message = "Unkown user",
                 };
             }
-            users.Password = PasswordHasher.SHA256_Hash(request.NewPassword);
+            string hashedPassword = PasswordHasher.SHA256_Hash(request.CurrentPassword);
+
+            if (hashedPassword.Equals(user.Password) == false)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = "Incorrect password!",
+                };
+            }
+
+            user.Password = PasswordHasher.SHA256_Hash(request.NewPassword);
 
             _context.SaveChanges();
 

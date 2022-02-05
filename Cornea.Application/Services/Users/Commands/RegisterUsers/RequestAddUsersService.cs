@@ -25,6 +25,7 @@ namespace Cornea.Application.Services.Users.Commands.RegisterUsers
         public string AdditionalInfo { get; set; }
         public string Resumedir { get; set; }
         public string Password { get; set; }
+        public string Repeatpassword { get; set; }
         public string Username { get; set; }
     }
 }

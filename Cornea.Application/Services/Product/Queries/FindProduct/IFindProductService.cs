@@ -37,7 +37,8 @@ namespace Cornea.Application.Services.Product.Queries.FindProduct
                 Name = products.Name,
                 Price = products.Price,
                 Number = products.Number,
-                Imagedir = products.Imagedir
+                Imagedir = products.Imagedir,
+                Status = products.Status
             };
             return new ResultDto<ResultFindProductService>
             {
@@ -54,6 +55,6 @@ namespace Cornea.Application.Services.Product.Queries.FindProduct
         public string Price { get; set; }
         public string Number { get; set; }
         public string Imagedir { get; set; }
-
+        public bool Status { get; set; }
     }
 }
