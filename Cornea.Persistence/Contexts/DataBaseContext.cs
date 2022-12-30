@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace Cornea.Persistence.Contexts
 {
     public partial class DataBaseContext : DbContext, IDataBaseContext
-    {
+    { 
         public DataBaseContext()
         {
         }

@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
+      "projectUniqueName": "F:\\DuratInstruments\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
       "projectName": "Cornea.Infrastructure",
-      "projectPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
+      "projectPath": "F:\\DuratInstruments\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Yousef\\.nuget\\packages\\",
-      "outputPath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Infrastructure\\obj\\",
+      "outputPath": "F:\\DuratInstruments\\Cornea\\Cornea.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yousef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -231,11 +231,12 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wNWKCuDdSxGXR6Cr8yLRyeo0tU1G2cmyMKBpVHZSn5auHteJ6hKfKlmVMZ8kBlq+FEIxxLTY31R+YOallHs0vw==",
+  "dgSpecHash": "OrS/Qw6yd+4pfVppqAei+KW5LdhxlgcMYyEXAjDVvRClFISYGPcPoeP9afL60HFJiVzpSof+zIVp0EUqCHSq1Q==",
   "success": true,
-  "projectFilePath": "F:\\DuratInstruments\\Cornea\\V1\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
+  "projectFilePath": "F:\\DuratInstruments\\Cornea\\Cornea.Infrastructure\\Cornea.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yousef\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Yousef\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

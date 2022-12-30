@@ -129,7 +129,6 @@ namespace Cornea.Site
             string contectionString = @"Data Source=localhost; Initial Catalog=CorneaDb; Integrated Security=True;";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option => option.UseSqlServer(contectionString));
             services.AddControllersWithViews();
-            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
